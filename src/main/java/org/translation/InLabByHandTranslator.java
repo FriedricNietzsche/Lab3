@@ -2,18 +2,26 @@ package org.translation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 // TODO Task: modify this class so that it also supports the Spanish language code "es" and
 //            one more language code of your choice. Each member of your group should add
-//            support for one additional langauge code on a branch; then push and create a pull request on GitHub.
+//            support for one additional language code on a branch; then push and create a pull request on GitHub.
 
 // Extra Task: if your group has extra time, you can add support for another country code in this class.
 
 /**
  * An implementation of the Translator interface which translates
- * the country code "can" to several languages.
+ * the country code CANADA to several languages.
  */
 public class InLabByHandTranslator implements Translator {
+
+    public static final String CANADA = "can";
+    private final Map<String, String> countryNames = Map.of(
+            "de", "Kanada",
+            "en", "Canada",
+            "zh", "加拿大");
+
     /**
      * Returns the language abbreviations for all languages whose translations are
      * available for the given country.
@@ -21,17 +29,14 @@ public class InLabByHandTranslator implements Translator {
      * @param country the country
      * @return list of language abbreviations which are available for this country
      */
+
     @Override
     public List<String> getCountryLanguages(String country) {
-        // TODO Checkstyle: The String "can" appears 4 times in the file.
-        if ("can".equals(country)) {
+        if (CANADA.equals(country)) {
             return new ArrayList<>(List.of("de", "en", "zh"));
         }
         return new ArrayList<>();
     }
-
-    // TODO Checkstyle: Static variable definition in wrong order.
-    public static final String CANADA = "can";
 
     /**
      * Returns the country abbreviations for all countries whose translations are
@@ -41,7 +46,7 @@ public class InLabByHandTranslator implements Translator {
      */
     @Override
     public List<String> getCountries() {
-        return new ArrayList<>(List.of("can"));
+        return new ArrayList<>(List.of(CANADA));
     }
 
     /**
@@ -53,22 +58,9 @@ public class InLabByHandTranslator implements Translator {
      */
     @Override
     public String translate(String country, String language) {
-        // TODO Checkstyle: Return count is 5 (max allowed for non-void methods/ lambdas is 2).
-        // TODO Checkstyle: String literal expressions should be on the left side of an equals comparison
-        if (!country.equals("can")) {
+        if (!CANADA.equals(country) || !countryNames.containsKey(language)) {
             return null;
         }
-        if (language.equals("de")) {
-            return "Kanada";
-        }
-        else if (language.equals("en")) {
-            return "Canada";
-        }
-        else if ("zh".equals(language)) {
-            return "加拿大";
-        }
-        else {
-            return null;
-        }
+        return countryNames.get(language);
     }
 }
