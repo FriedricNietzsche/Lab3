@@ -2,7 +2,6 @@ package org.translation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 // TODO Task: modify this class so that it also supports the Spanish language code "es" and
 //            one more language code of your choice. Each member of your group should add
@@ -17,10 +16,17 @@ import java.util.Map;
 public class InLabByHandTranslator implements Translator {
 
     public static final String CANADA = "can";
-    private final Map<String, String> countryNames = Map.of(
-            "de", "Kanada",
-            "en", "Canada",
-            "zh", "加拿大");
+
+    /**
+     * Returns the country abbreviations for all countries whose translations are
+     * available from this Translator.
+     *
+     * @return list of country abbreviations for which we have translations available
+     */
+    @Override
+    public List<String> getCountries() {
+        return new ArrayList<>(List.of(CANADA));
+    }
 
     /**
      * Returns the language abbreviations for all languages whose translations are
@@ -39,17 +45,6 @@ public class InLabByHandTranslator implements Translator {
     }
 
     /**
-     * Returns the country abbreviations for all countries whose translations are
-     * available from this Translator.
-     *
-     * @return list of country abbreviations for which we have translations available
-     */
-    @Override
-    public List<String> getCountries() {
-        return new ArrayList<>(List.of(CANADA));
-    }
-
-    /**
      * Returns the name of the country based on the specified country abbreviation and language abbreviation.
      *
      * @param country  the country
@@ -58,9 +53,29 @@ public class InLabByHandTranslator implements Translator {
      */
     @Override
     public String translate(String country, String language) {
-        if (!CANADA.equals(country) || !countryNames.containsKey(language)) {
+
+        if (!"can".equals(country)) {
             return null;
         }
-        return countryNames.get(language);
+
+        String result = null;
+
+        switch (language) {
+            case "de":
+                result = "Kanada";
+                break;
+            case "en":
+                result = "Canada";
+                break;
+            case "zh":
+                result = "加拿大";
+                break;
+            case "es":
+                result = "Canadá";
+                break;
+            default:
+        }
+
+        return result;
     }
 }
