@@ -13,8 +13,6 @@ import java.util.Map;
  */
 public class CountryCodeConverter {
 
-    // TODO Task: pick appropriate instance variable(s) to store the data necessary for this class
-
     /**
      * Default constructor which will load the country codes from "country-codes.txt"
      * in the resources folder.
@@ -29,12 +27,15 @@ public class CountryCodeConverter {
      * @throws RuntimeException if the resource file can't be loaded properly
      */
     public CountryCodeConverter(String filename) {
-
+        String regex = "[A-Z]{3}";
         try {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
 
-            // TODO Task: use lines to populate the instance variable(s)
+            for (String line : lines) {
+                Map<String, String> countryNames = new HashMap<>();
+                countryNames.put(line.split(regex)[0], line.split(regex)[1]);
+            }
 
         }
         catch (IOException | URISyntaxException ex) {
