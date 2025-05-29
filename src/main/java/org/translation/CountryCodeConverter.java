@@ -46,7 +46,8 @@ public class CountryCodeConverter {
                     continue;
                 }
                 String[] parts = line.split("\t");
-                String[] codes = new String[] {parts[1], parts[2], parts[parts.length - 1]};
+                String[] codes = new String[] {parts[1].toLowerCase(), parts[2].toLowerCase(),
+                        parts[parts.length - 1].toLowerCase()};
                 String countryName = parts[0];
                 nameCode.put(countryName, codes);
                 for (String code : codes) {

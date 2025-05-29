@@ -89,4 +89,3 @@ public class JSONTranslator implements Translator {
         return null;
     }
 }
-
