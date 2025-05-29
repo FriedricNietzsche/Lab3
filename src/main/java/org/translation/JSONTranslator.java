@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -59,7 +63,8 @@ public class JSONTranslator implements Translator {
                 countryToTranslation.put(countryCode, translations);
                 countryToLanguageCodes.put(countryCode, codes);
             }
-        } catch (IOException | URISyntaxException ex) {
+        }
+        catch (IOException | URISyntaxException ex) {
             throw new RuntimeException("Failed to load translation data from " + filename, ex);
         }
     }

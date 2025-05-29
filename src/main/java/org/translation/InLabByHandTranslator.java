@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class InLabByHandTranslator implements Translator {
 
-    public static final String CANADA = "can";
+    public static final String CANADA = "CAN";
 
     /**
      * Returns the country abbreviations for all countries whose translations are
@@ -39,7 +39,7 @@ public class InLabByHandTranslator implements Translator {
     @Override
     public List<String> getCountryLanguages(String country) {
         if (CANADA.equals(country)) {
-            return new ArrayList<>(List.of("de", "en", "zh"));
+            return new ArrayList<>(List.of("de", "en", "zh", "es"));
         }
         return new ArrayList<>();
     }

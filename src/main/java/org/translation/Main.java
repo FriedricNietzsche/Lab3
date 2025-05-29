@@ -41,18 +41,19 @@ public class Main {
      */
     public static void runProgram(Translator translator) {
         while (true) {
-            String country = promptForCountry(translator);
+
+            CountryCodeConverter countryConverter = new CountryCodeConverter();
+            LanguageCodeConverter languageConverter = new LanguageCodeConverter();
+            String country = countryConverter.fromCountry(promptForCountry(translator));
             if (QUIT.equals(country)) {
                 break;
             }
-            String language = promptForLanguage(translator, country);
+            String language = languageConverter.fromLanguage(promptForLanguage(translator, country));
             if (QUIT.equals(language)) {
                 break;
             }
-            CountryCodeConverter countryConverter = new CountryCodeConverter();
-            LanguageCodeConverter languageConverter = new LanguageCodeConverter();
-            System.out.println(country + " in " + language + " is " + translator
-                    .translate(countryConverter.fromCountry(country), languageConverter.fromLanguage(language)));
+            System.out.println(countryConverter.fromCountryCode(country) + " in "
+                    + languageConverter.fromLanguageCode(language) + " is " + translator.translate(country, language));
             System.out.println("Press enter to continue or quit to exit.");
             Scanner s = new Scanner(System.in);
             String textTyped = s.nextLine();
@@ -65,6 +66,7 @@ public class Main {
 
     // Note: CheckStyle is configured so that we don't need javadoc for private methods
     private static String promptForCountry(Translator translator) {
+
         List<String> countries = translator.getCountries();
         CountryCodeConverter converter = new CountryCodeConverter();
         countries.replaceAll(converter::fromCountryCode);
@@ -82,7 +84,6 @@ public class Main {
 
     // Note: CheckStyle is configured so that we don't need javadoc for private methods
     private static String promptForLanguage(Translator translator, String country) {
-
         List<String> languages = translator.getCountryLanguages(country);
         LanguageCodeConverter converter = new LanguageCodeConverter();
         languages.replaceAll(converter::fromLanguageCode);
