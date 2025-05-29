@@ -40,10 +40,11 @@ public class Main {
 
             CountryCodeConverter countryConverter = new CountryCodeConverter();
             LanguageCodeConverter languageConverter = new LanguageCodeConverter();
-            String country = countryConverter.fromCountry(promptForCountry(translator));
+            String country = promptForCountry(translator);
             if (QUIT.equals(country)) {
                 break;
             }
+            country = countryConverter.fromCountry(country);
             String language = languageConverter.fromLanguage(promptForLanguage(translator, country));
             if (QUIT.equals(language)) {
                 break;

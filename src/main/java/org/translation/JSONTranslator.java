@@ -72,7 +72,12 @@ public class JSONTranslator implements Translator {
     @Override
     public List<String> getCountryLanguages(String country) {
         List<String> codes = countryToLanguageCodes.get(country);
-        return codes != null ? new ArrayList<>(codes) : Collections.emptyList();
+        if (codes != null) {
+            return new ArrayList<>(codes);
+        }
+        else {
+            return Collections.emptyList();
+        }
     }
 
     @Override
