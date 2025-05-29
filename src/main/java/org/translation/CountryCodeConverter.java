@@ -15,7 +15,7 @@ import java.util.Map;
 public class CountryCodeConverter {
 
     private final Map<String, String> codeName = new HashMap<>();
-    private final Map<String, String> nameCode = new HashMap<>();
+    private final Map<String, String[]> nameCode = new HashMap<>();
 
     /**
      * Default constructor which will load the country codes from "country-codes.txt"
@@ -48,7 +48,7 @@ public class CountryCodeConverter {
                 String[] parts = line.split("\t");
                 String[] codes = new String[] {parts[1], parts[2], parts[parts.length - 1]};
                 String countryName = parts[0];
-                nameCode.put(countryName, String.join(", ", codes));
+                nameCode.put(countryName, codes);
                 for (String code : codes) {
                     codeName.put(code, countryName);
                 }
@@ -67,7 +67,7 @@ public class CountryCodeConverter {
      * @return the name of the country corresponding to the code
      */
     public String fromCountryCode(String code) {
-        return codeName.get(code.toUpperCase());
+        return codeName.get(code);
     }
 
     /**
@@ -76,7 +76,7 @@ public class CountryCodeConverter {
      * @return the 3-letter code of the country
      */
     public String fromCountry(String country) {
-        return nameCode.get(country);
+        return nameCode.get(country)[1];
     }
 
     /**
