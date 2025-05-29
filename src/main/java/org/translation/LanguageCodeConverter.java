@@ -36,20 +36,18 @@ public class LanguageCodeConverter {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
 
-            // TODO Task: use lines to populate the instance variable
-            //           tip: you might find it convenient to create an iterator using lines.iterator()
             Iterator<String> iterator = lines.iterator();
             if (iterator.hasNext()) {
                 iterator.next();
             }
             while (iterator.hasNext()) {
-                String line = iterator.next().trim();
+                String line = iterator.next();
                 if (line.isEmpty()) {
                     continue;
                 }
                 String[] parts = line.split("\t");
-                String languageName = parts[0].trim();
-                String code = parts[1].trim();
+                String languageName = parts[0];
+                String code = parts[1];
                 codeName.put(code, languageName);
                 String[] aliases = parts[0].split(", ");
                 for (String alias : aliases) {
